@@ -7,7 +7,11 @@ function getRepos(githubUsername){
         }
         throw new Error(response.statusText);
     })
-    .then(responseJson => printRepos(responseJson, githubUsername));
+    .then(responseJson => printRepos(responseJson, githubUsername))
+    .catch(err => {
+        $('#results-list').empty();
+        $('#js-error-message').text(`Sorry theres been an error: ${err.message}`)
+    });
 }
 
 function printRepos(responseJson, githubUsername){
